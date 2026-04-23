@@ -1,0 +1,2898 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Novena · San José Obrero 2025</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600&family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <style>
+      /* ══════════════════════════════════════
+       TOKENS
+    ══════════════════════════════════════ */
+      :root {
+        --c0: #0d2b29; /* darkest */
+        --c1: #133d39;
+        --c2: #1a5450;
+        --c3: #226b65;
+        --c4: #2e897f;
+        --c5: #5ec4b8; /* +20% más claro */
+        --c6: #7dd3cc;
+        --c7: #aee5e0;
+        --c8: #d8f5f1;
+        --c9: #f3fdfc;
+        --gold: #d4a843;
+        --gold2: #f0cc7a;
+        --white: #ffffff;
+        --glass: rgba(255, 255, 255, 0.07);
+        --glass-border: rgba(255, 255, 255, 0.14);
+        --radius-lg: 24px;
+        --radius-xl: 36px;
+        --shadow-glow: 0 0 60px rgba(62, 168, 156, 0.25);
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--c0);
+        color: var(--white);
+        min-height: 100vh;
+        overflow-x: hidden;
+        cursor: none;
+      }
+
+      /* ══════════════════════════════════════
+       CUSTOM CURSOR (sólo desktop)
+    ══════════════════════════════════════ */
+      .cursor-dot,
+      .cursor-ring {
+        position: fixed;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+        z-index: 9999;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        mix-blend-mode: difference;
+      }
+      .cursor-dot {
+        width: 6px;
+        height: 6px;
+        background: #fff;
+        transition:
+          width 0.2s,
+          height 0.2s;
+      }
+      .cursor-ring {
+        width: 36px;
+        height: 36px;
+        border: 1.5px solid rgba(255, 255, 255, 0.45);
+        transition:
+          width 0.25s ease,
+          height 0.25s ease,
+          border-color 0.25s;
+      }
+      .cursor-ring.active {
+        width: 60px;
+        height: 60px;
+        border-color: var(--gold2);
+      }
+      @media (max-width: 900px), (hover: none) {
+        body {
+          cursor: auto;
+        }
+        .cursor-dot,
+        .cursor-ring {
+          display: none;
+        }
+      }
+
+      /* ══════════════════════════════════════
+       GOLD PARTICLES (flotando hacia arriba)
+    ══════════════════════════════════════ */
+      .gold-particles {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 2;
+        overflow: hidden;
+      }
+      .gp {
+        position: absolute;
+        bottom: -20px;
+        width: 3px;
+        height: 3px;
+        border-radius: 50%;
+        background: var(--gold2);
+        box-shadow:
+          0 0 8px var(--gold),
+          0 0 16px rgba(240, 204, 122, 0.4);
+        opacity: 0;
+        animation: floatGold var(--dur) var(--delay) infinite linear;
+      }
+      @keyframes floatGold {
+        0% {
+          opacity: 0;
+          transform: translateY(0) translateX(0) scale(0.3);
+        }
+        10% {
+          opacity: 0.9;
+        }
+        50% {
+          opacity: 0.7;
+        }
+        90% {
+          opacity: 0.5;
+        }
+        100% {
+          opacity: 0;
+          transform: translateY(-110vh) translateX(var(--drift)) scale(1);
+        }
+      }
+
+      /* ══════════════════════════════════════
+       AURORA (en el hero)
+    ══════════════════════════════════════ */
+      .aurora {
+        position: absolute;
+        inset: -50%;
+        pointer-events: none;
+        z-index: 0;
+        background: conic-gradient(
+          from 0deg at 50% 50%,
+          transparent 0deg,
+          rgba(94, 196, 184, 0.15) 60deg,
+          transparent 120deg,
+          rgba(212, 168, 67, 0.12) 180deg,
+          transparent 240deg,
+          rgba(94, 196, 184, 0.18) 300deg,
+          transparent 360deg
+        );
+        filter: blur(80px);
+        animation: rotateAurora 40s linear infinite;
+        opacity: 0.85;
+      }
+      @keyframes rotateAurora {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ══════════════════════════════════════
+       STICKY MINI-NAV (aparece al scroll)
+    ══════════════════════════════════════ */
+      .mini-nav {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 200;
+        background: rgba(13, 43, 41, 0.78);
+        backdrop-filter: blur(24px) saturate(140%);
+        -webkit-backdrop-filter: blur(24px) saturate(140%);
+        border-bottom: 1px solid rgba(94, 196, 184, 0.12);
+        transform: translateY(-110%);
+        transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .mini-nav.show {
+        transform: translateY(0);
+      }
+      .mini-nav-inner {
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 0.65rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+      .mini-nav-title {
+        font-family: "Cormorant Garamond", serif;
+        font-style: italic;
+        font-size: 1.15rem;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .mini-nav-title strong {
+        color: var(--gold2);
+        font-weight: 600;
+        font-style: normal;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.82rem;
+        letter-spacing: 0.18rem;
+        text-transform: uppercase;
+        margin-right: 0.5rem;
+      }
+      .mini-nav-prog {
+        display: flex;
+        align-items: center;
+        gap: 0.6rem;
+      }
+      .mini-nav-ring {
+        position: relative;
+        width: 36px;
+        height: 36px;
+      }
+      .mini-nav-count {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--c7);
+      }
+      @media (max-width: 640px) {
+        .mini-nav-inner {
+          padding: 0.5rem 1rem;
+        }
+        .mini-nav-title {
+          font-size: 0.85rem;
+        }
+        .mini-nav-title strong {
+          display: none;
+        }
+      }
+
+      /* ══════════════════════════════════════
+       SPOTLIGHT en cards (mouse-follow glow)
+    ══════════════════════════════════════ */
+      .spotlight {
+        --mx: 50%;
+        --my: 50%;
+        position: relative;
+      }
+      .spotlight::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+          circle 220px at var(--mx) var(--my),
+          rgba(94, 196, 184, 0.18),
+          transparent 65%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        pointer-events: none;
+        z-index: 1;
+      }
+      .spotlight:hover::before {
+        opacity: 1;
+      }
+      .spotlight > * {
+        position: relative;
+        z-index: 2;
+      }
+
+      /* ══════════════════════════════════════
+       SHIMMER en el título del hero
+    ══════════════════════════════════════ */
+      @keyframes titleShimmer {
+        0% {
+          background-position: 200% center;
+        }
+        100% {
+          background-position: -200% center;
+        }
+      }
+
+      /* ══════════════════════════════════════
+       SHIMMER del CTA
+    ══════════════════════════════════════ */
+      .hero-cta {
+        position: relative;
+        overflow: hidden;
+      }
+      .hero-cta::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -150%;
+        width: 60%;
+        height: 100%;
+        background: linear-gradient(
+          100deg,
+          transparent,
+          rgba(255, 255, 255, 0.25),
+          transparent
+        );
+        animation: ctaShimmer 3.5s ease-in-out infinite;
+      }
+      @keyframes ctaShimmer {
+        0%,
+        60% {
+          left: -150%;
+        }
+        100% {
+          left: 150%;
+        }
+      }
+
+      /* ══════════════════════════════════════
+       ORNAMENT DIVIDERS entre secciones
+    ══════════════════════════════════════ */
+      .ornament-div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        max-width: 320px;
+        margin: 1.5rem auto;
+        opacity: 0.7;
+        position: relative;
+        z-index: 10;
+      }
+      .ornament-div::before,
+      .ornament-div::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(212, 168, 67, 0.5),
+          transparent
+        );
+      }
+      .ornament-div svg {
+        width: 32px;
+        height: 32px;
+        color: var(--gold2);
+        animation: gentleSpin 25s linear infinite;
+      }
+      @keyframes gentleSpin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* ══════════════════════════════════════
+       NOISE TEXTURE OVERLAY
+    ══════════════════════════════════════ */
+      body::before {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+        pointer-events: none;
+        z-index: 1000;
+        opacity: 0.6;
+      }
+
+      /* ══════════════════════════════════════
+       ANIMATED BG BLOBS
+    ══════════════════════════════════════ */
+      .blobs {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+      }
+      .blob {
+        position: absolute;
+        border-radius: 50%;
+        filter: blur(80px);
+        animation: drift var(--t) ease-in-out infinite alternate;
+      }
+      .blob-1 {
+        width: 600px;
+        height: 600px;
+        background: rgba(46, 137, 127, 0.18);
+        top: -100px;
+        left: -150px;
+        --t: 12s;
+      }
+      .blob-2 {
+        width: 400px;
+        height: 400px;
+        background: rgba(212, 168, 67, 0.1);
+        top: 30%;
+        right: -100px;
+        --t: 9s;
+      }
+      .blob-3 {
+        width: 500px;
+        height: 500px;
+        background: rgba(94, 196, 184, 0.12);
+        bottom: -100px;
+        left: 30%;
+        --t: 15s;
+      }
+      @keyframes drift {
+        from {
+          transform: translate(0, 0) scale(1);
+        }
+        to {
+          transform: translate(40px, 30px) scale(1.08);
+        }
+      }
+
+      /* ══════════════════════════════════════
+       HERO
+    ══════════════════════════════════════ */
+      .hero {
+        position: relative;
+        z-index: 10;
+        min-height: 100svh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem 1.5rem;
+        text-align: center;
+        overflow: hidden;
+      }
+
+      /* grid lines decorativas */
+      .hero::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background-image:
+          linear-gradient(rgba(94, 196, 184, 0.05) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(94, 196, 184, 0.05) 1px, transparent 1px);
+        background-size: 60px 60px;
+        mask-image: radial-gradient(
+          ellipse 80% 80% at 50% 50%,
+          black,
+          transparent
+        );
+      }
+
+      .hero-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(12px);
+        border-radius: 999px;
+        padding: 0.45rem 1.1rem;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.72rem;
+        font-weight: 500;
+        letter-spacing: 0.18rem;
+        text-transform: uppercase;
+        color: var(--c7);
+        margin-bottom: 2rem;
+        animation: fadeDown 0.7s ease both;
+      }
+      .hero-eyebrow .dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--gold2);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+          transform: scale(1);
+        }
+        50% {
+          opacity: 0.5;
+          transform: scale(0.7);
+        }
+      }
+
+      .hero-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(3.2rem, 10vw, 7rem);
+        font-weight: 300;
+        line-height: 1;
+        letter-spacing: -0.02em;
+        animation: fadeDown 0.7s 0.1s ease both;
+      }
+      .hero-title .line-accent {
+        font-weight: 700;
+        font-style: italic;
+        background: linear-gradient(
+          110deg,
+          var(--c6) 20%,
+          var(--gold2) 45%,
+          #fff 50%,
+          var(--gold2) 55%,
+          var(--c6) 80%
+        );
+        background-size: 250% 100%;
+        background-position: 200% center;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: block;
+        animation: titleShimmer 6s linear infinite;
+      }
+      .hero-title .line-light {
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.55);
+        font-size: 0.55em;
+        letter-spacing: 0.25rem;
+        text-transform: uppercase;
+        font-style: normal;
+        font-family: "Space Grotesk", sans-serif;
+        display: block;
+        margin-top: 0.5rem;
+      }
+
+      /* image container — enfoque limpio sin inset negativo */
+      .hero-image-wrap {
+        position: relative;
+        margin: 2rem auto 0;
+        width: 280px;
+        height: 340px;
+        flex-shrink: 0;
+        animation: fadeUp 0.9s 0.3s ease both;
+      }
+
+      /* glow de fondo */
+      .hero-image-glow {
+        position: absolute;
+        inset: -24px;
+        background: radial-gradient(
+          ellipse,
+          rgba(62, 168, 156, 0.3) 0%,
+          transparent 68%
+        );
+        border-radius: 50%;
+        animation: glowPulse 3s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+      @keyframes glowPulse {
+        from {
+          opacity: 0.6;
+          transform: scale(0.95);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1.05);
+        }
+      }
+
+      /* marco con forma morphing */
+      .hero-image-frame {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 40% 60% 55% 45% / 45% 45% 55% 55%;
+        animation: morphBorder 6s ease-in-out infinite alternate;
+        overflow: hidden;
+        box-shadow:
+          0 0 0 3px var(--c0),
+          0 0 0 6px var(--c5),
+          0 0 0 9px var(--c0),
+          0 0 0 11px rgba(212, 168, 67, 0.6),
+          0 16px 56px rgba(0, 0, 0, 0.5);
+        background: #f5f0e8;
+      }
+      @keyframes morphBorder {
+        0% {
+          border-radius: 40% 60% 55% 45% / 45% 45% 55% 55%;
+        }
+        33% {
+          border-radius: 55% 45% 45% 55% / 55% 60% 40% 45%;
+        }
+        66% {
+          border-radius: 45% 55% 60% 40% / 40% 50% 50% 60%;
+        }
+        100% {
+          border-radius: 60% 40% 45% 55% / 50% 45% 55% 50%;
+        }
+      }
+
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        object-position: center center;
+        display: block;
+        padding: 0.75rem;
+      }
+
+      /* vignette: funde el blanco del borde hacia el fondo oscuro */
+      .hero-image-frame::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        background: radial-gradient(
+          ellipse 72% 75% at 50% 52%,
+          transparent 38%,
+          var(--c0) 78%
+        );
+        pointer-events: none;
+        z-index: 1;
+      }
+
+      .hero-desc {
+        max-width: 460px;
+        font-size: 1.1rem;
+        line-height: 1.8;
+        color: var(--c8);
+        margin-bottom: 2.5rem;
+        animation: fadeUp 0.9s 0.4s ease both;
+        background: rgba(13, 43, 41, 0.65);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border: 1px solid rgba(94, 196, 184, 0.18);
+        border-radius: 16px;
+        padding: 1rem 1.5rem;
+      }
+
+      .hero-cta {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.75rem;
+        background: linear-gradient(135deg, var(--c4), var(--c3));
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #fff;
+        font-family: "Space Grotesk", sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        letter-spacing: 0.05rem;
+        padding: 0.9rem 2rem;
+        border-radius: 999px;
+        cursor: pointer;
+        text-decoration: none;
+        box-shadow:
+          0 8px 32px rgba(46, 137, 127, 0.35),
+          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+        transition: all 0.25s;
+        animation: fadeUp 0.9s 0.5s ease both;
+      }
+      .hero-cta:hover {
+        transform: translateY(-2px);
+        box-shadow:
+          0 16px 48px rgba(46, 137, 127, 0.5),
+          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+      }
+      .hero-cta .arrow {
+        width: 28px;
+        height: 28px;
+        background: rgba(255, 255, 255, 0.15);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.85rem;
+      }
+
+      /* scroll indicator */
+      .scroll-hint {
+        position: absolute;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.7rem;
+        letter-spacing: 0.15rem;
+        text-transform: uppercase;
+        animation: fadeIn 1.5s 1s ease both;
+      }
+      .scroll-hint .bar {
+        width: 1px;
+        height: 40px;
+        background: linear-gradient(
+          180deg,
+          rgba(94, 196, 184, 0.7),
+          transparent
+        );
+        animation: scrollBar 2s ease-in-out infinite;
+      }
+      @keyframes scrollBar {
+        0%,
+        100% {
+          transform: scaleY(1);
+          opacity: 1;
+        }
+        50% {
+          transform: scaleY(0.4);
+          opacity: 0.4;
+        }
+      }
+
+      /* ══════════════════════════════════════
+       SECTION WRAPPER
+    ══════════════════════════════════════ */
+      .section {
+        position: relative;
+        z-index: 10;
+        max-width: 860px;
+        margin: 0 auto;
+        padding: 4rem 1.5rem;
+      }
+
+      .section-label {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.2rem;
+        text-transform: uppercase;
+        color: var(--c6);
+        margin-bottom: 1rem;
+      }
+      .section-label::before {
+        content: "";
+        width: 24px;
+        height: 1px;
+        background: var(--c5);
+      }
+
+      .section-heading {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(2rem, 5vw, 3rem);
+        font-weight: 600;
+        line-height: 1.15;
+        margin-bottom: 0.5rem;
+      }
+      .section-heading em {
+        font-style: italic;
+        background: linear-gradient(135deg, var(--c6), var(--gold2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      /* ══════════════════════════════════════
+       PROGRESS RING
+    ══════════════════════════════════════ */
+      .progress-section {
+        position: relative;
+        z-index: 10;
+        background: linear-gradient(135deg, var(--c1) 0%, var(--c0) 100%);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 3rem 1.5rem;
+      }
+      .progress-inner {
+        max-width: 860px;
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        gap: 3rem;
+        flex-wrap: wrap;
+      }
+      .ring-wrap {
+        position: relative;
+        flex-shrink: 0;
+        width: 120px;
+        height: 120px;
+      }
+      .ring-svg {
+        transform: rotate(-90deg);
+      }
+      .ring-track {
+        fill: none;
+        stroke: rgba(255, 255, 255, 0.07);
+        stroke-width: 8;
+      }
+      .ring-fill {
+        fill: none;
+        stroke-width: 8;
+        stroke-linecap: round;
+        stroke: url(#ringGrad);
+        stroke-dasharray: 314;
+        stroke-dashoffset: 314;
+        transition: stroke-dashoffset 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .ring-label {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+      .ring-num {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.75rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--c6), var(--gold2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .ring-of {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.35);
+        letter-spacing: 0.05rem;
+      }
+
+      .progress-info {
+        flex: 1;
+        min-width: 200px;
+      }
+      .progress-info h3 {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.35rem;
+      }
+      .progress-info p {
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .days-dots {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-top: 1rem;
+      }
+      .days-dots .ddot {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.04);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.35);
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .days-dots .ddot:hover {
+        border-color: var(--c5);
+        color: var(--c7);
+      }
+      .days-dots .ddot.done {
+        background: linear-gradient(135deg, var(--c4), var(--c3));
+        border-color: var(--c4);
+        color: #fff;
+        box-shadow: 0 4px 12px rgba(46, 137, 127, 0.3);
+      }
+
+      /* ══════════════════════════════════════
+       ORACIONES INICIALES
+    ══════════════════════════════════════ */
+      .accordion-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .accordion-item {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(20px);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        transition: border-color 0.3s;
+      }
+      .accordion-item:hover {
+        border-color: rgba(94, 196, 184, 0.3);
+      }
+      .accordion-item.open {
+        border-color: rgba(94, 196, 184, 0.4);
+      }
+
+      .accordion-trigger {
+        width: 100%;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        text-align: left;
+      }
+      .accordion-icon-wrap {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+        flex-shrink: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(46, 137, 127, 0.3),
+          rgba(94, 196, 184, 0.15)
+        );
+        border: 1px solid rgba(94, 196, 184, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.1rem;
+      }
+      .accordion-label {
+        flex: 1;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.05rem;
+        font-weight: 500;
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .accordion-chevron {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--c6);
+        font-size: 0.7rem;
+        transition: transform 0.3s;
+        flex-shrink: 0;
+      }
+      .accordion-item.open .accordion-chevron {
+        transform: rotate(180deg);
+      }
+
+      .accordion-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.45s cubic-bezier(0, 1, 0, 1);
+      }
+      .accordion-item.open .accordion-body {
+        max-height: 4000px;
+        transition: max-height 0.6s ease-in-out;
+      }
+      .accordion-body-inner {
+        padding: 0 1.5rem 1.75rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding-top: 1.25rem;
+      }
+
+      .prayer {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.25rem;
+        line-height: 2;
+        color: rgba(255, 255, 255, 0.75);
+      }
+      .prayer strong {
+        color: var(--c7);
+        font-weight: 600;
+      }
+      .prayer em {
+        color: var(--gold2);
+        font-style: italic;
+      }
+      .prayer .amen {
+        color: var(--c6);
+        font-style: italic;
+        font-weight: 600;
+      }
+      .prayer .instruction {
+        display: block;
+        margin-top: 1rem;
+        font-style: italic;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 1.05rem;
+      }
+
+      /* ══════════════════════════════════════
+       9 DÍAS — DISEÑO TIPO CARRUSEL
+    ══════════════════════════════════════ */
+      .novena-section {
+        position: relative;
+        z-index: 10;
+        padding: 4rem 1.5rem;
+      }
+      .novena-inner {
+        max-width: 860px;
+        margin: 0 auto;
+      }
+
+      /* pill selector */
+      .day-selector {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 2.5rem;
+      }
+      .day-pill {
+        padding: 0.45rem 1rem;
+        border-radius: 999px;
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.45);
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.92rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .day-pill:hover {
+        border-color: var(--c5);
+        color: var(--c7);
+      }
+      .day-pill.active {
+        background: linear-gradient(135deg, var(--c4), var(--c3));
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(46, 137, 127, 0.4);
+      }
+      .day-pill.done-pill::after {
+        content: " ✓";
+        color: var(--gold2);
+      }
+
+      /* day card */
+      .day-card {
+        display: none;
+        animation: slideIn 0.4s ease both;
+      }
+      .day-card.active {
+        display: block;
+      }
+      @keyframes slideIn {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .day-card-inner {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(24px);
+        border-radius: var(--radius-xl);
+        overflow: hidden;
+      }
+
+      .day-card-top {
+        position: relative;
+        padding: 2.5rem 2.5rem 2rem;
+        background: linear-gradient(
+          135deg,
+          rgba(46, 137, 127, 0.25) 0%,
+          rgba(34, 107, 101, 0.15) 50%,
+          rgba(19, 61, 57, 0.05) 100%
+        );
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .day-card-top::before {
+        content: attr(data-num);
+        position: absolute;
+        right: 2rem;
+        top: 1.5rem;
+        font-family: "Cormorant Garamond", serif;
+        font-size: 7rem;
+        font-weight: 700;
+        line-height: 1;
+        color: rgba(255, 255, 255, 0.04);
+        pointer-events: none;
+        user-select: none;
+      }
+      .day-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background: rgba(94, 196, 184, 0.12);
+        border: 1px solid rgba(94, 196, 184, 0.25);
+        border-radius: 999px;
+        padding: 0.3rem 0.8rem;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.82rem;
+        font-weight: 600;
+        letter-spacing: 0.12rem;
+        text-transform: uppercase;
+        color: var(--c7);
+        margin-bottom: 0.75rem;
+      }
+      .day-card-title {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.5rem, 4vw, 2.2rem);
+        font-weight: 600;
+        line-height: 1.2;
+      }
+      .day-card-title em {
+        font-style: italic;
+        background: linear-gradient(135deg, var(--c7), var(--gold2));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+      .day-virtue-tag {
+        margin-top: 0.75rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: rgba(255, 255, 255, 0.4);
+        font-size: 0.95rem;
+        font-family: "Space Grotesk", sans-serif;
+      }
+      .day-virtue-tag .vdot {
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: var(--gold);
+      }
+
+      .day-card-body {
+        padding: 2rem 2.5rem 2.5rem;
+      }
+
+      /* decorative quote mark */
+      .quote-mark {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 5rem;
+        line-height: 0.6;
+        color: rgba(94, 196, 184, 0.2);
+        margin-bottom: 0.5rem;
+        display: block;
+      }
+
+      /* actions row */
+      .day-actions {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+        margin-top: 2rem;
+        padding-top: 1.5rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.07);
+      }
+      .btn-mark {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.6rem;
+        padding: 0.65rem 1.4rem;
+        border-radius: 999px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.25s;
+        border: 1.5px solid rgba(94, 196, 184, 0.3);
+        background: transparent;
+        color: var(--c7);
+      }
+      .btn-mark:hover {
+        background: rgba(94, 196, 184, 0.1);
+      }
+      .btn-mark.marked {
+        background: linear-gradient(135deg, var(--gold), #b8912e);
+        border-color: transparent;
+        color: #fff;
+        box-shadow: 0 4px 16px rgba(212, 168, 67, 0.35);
+      }
+      .btn-mark .icon {
+        font-size: 0.9rem;
+      }
+
+      .day-nav-row {
+        display: flex;
+        gap: 0.5rem;
+      }
+      .btn-arrow {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        background: transparent;
+        color: rgba(255, 255, 255, 0.6);
+        cursor: pointer;
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+      }
+      .btn-arrow:hover {
+        border-color: var(--c5);
+        color: var(--c7);
+        background: rgba(94, 196, 184, 0.08);
+      }
+      .btn-arrow:disabled {
+        opacity: 0.25;
+        cursor: default;
+      }
+      .btn-arrow.fwd {
+        background: linear-gradient(135deg, var(--c4), var(--c3));
+        border-color: transparent;
+        color: #fff;
+      }
+      .btn-arrow.fwd:hover {
+        filter: brightness(1.15);
+      }
+
+      /* ══════════════════════════════════════
+       ORACIONES FINALES — GRID
+    ══════════════════════════════════════ */
+      .final-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+      .final-card {
+        background: var(--glass);
+        border: 1px solid var(--glass-border);
+        backdrop-filter: blur(20px);
+        border-radius: var(--radius-lg);
+        padding: 1.5rem;
+        cursor: pointer;
+        transition: all 0.25s;
+        position: relative;
+        overflow: hidden;
+      }
+      .final-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--c5), transparent);
+        opacity: 0;
+        transition: opacity 0.3s;
+      }
+      .final-card:hover {
+        border-color: rgba(94, 196, 184, 0.3);
+        transform: translateY(-2px);
+      }
+      .final-card:hover::before {
+        opacity: 1;
+      }
+      .final-card.open {
+        border-color: rgba(94, 196, 184, 0.4);
+      }
+      .final-card.open::before {
+        opacity: 1;
+      }
+
+      .final-card-head {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+      .final-card-icon {
+        width: 38px;
+        height: 38px;
+        border-radius: 10px;
+        flex-shrink: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(46, 137, 127, 0.3),
+          rgba(94, 196, 184, 0.1)
+        );
+        border: 1px solid rgba(94, 196, 184, 0.2);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+      }
+      .final-card-name {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 1.05rem;
+        font-weight: 600;
+        color: rgba(255, 255, 255, 0.85);
+      }
+      .final-card-hint {
+        font-size: 0.88rem;
+        color: rgba(255, 255, 255, 0.35);
+        margin-top: 0.1rem;
+      }
+      .final-card-body {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.45s ease;
+      }
+      .final-card.open .final-card-body {
+        max-height: 4000px;
+      }
+      .final-card-chevron {
+        margin-left: auto;
+        color: var(--c6);
+        font-size: 0.7rem;
+        transition: transform 0.3s;
+      }
+      .final-card.open .final-card-chevron {
+        transform: rotate(180deg);
+      }
+
+      /* ══════════════════════════════════════
+       LETANÍAS
+    ══════════════════════════════════════ */
+      .letanias-section {
+        position: relative;
+        z-index: 10;
+        background: linear-gradient(180deg, var(--c0) 0%, var(--c1) 100%);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+      }
+      .letanias-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 0.5rem;
+        margin-top: 1.5rem;
+      }
+      .letania-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 0.75rem;
+        padding: 0.65rem 1rem;
+        border-radius: 12px;
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        transition: background 0.2s;
+      }
+      .letania-row:hover {
+        background: rgba(94, 196, 184, 0.06);
+      }
+      .letania-inv {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1.1rem;
+        color: rgba(255, 255, 255, 0.7);
+      }
+      .letania-resp {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 1rem;
+        color: var(--c6);
+        font-style: italic;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      /* ══════════════════════════════════════
+       FOOTER
+    ══════════════════════════════════════ */
+      footer {
+        position: relative;
+        z-index: 10;
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        padding: 2.5rem 1.5rem;
+        text-align: center;
+      }
+      .footer-cross {
+        font-family: "Cormorant Garamond", serif;
+        font-size: 2rem;
+        color: var(--gold2);
+        display: block;
+        margin-bottom: 0.75rem;
+      }
+      footer p {
+        color: rgba(255, 255, 255, 0.3);
+        font-size: 0.92rem;
+        line-height: 1.8;
+      }
+      footer a {
+        color: var(--c6);
+        text-decoration: none;
+      }
+
+      /* ══════════════════════════════════════
+       TOAST
+    ══════════════════════════════════════ */
+      .toast {
+        position: fixed;
+        bottom: 2rem;
+        left: 50%;
+        transform: translateX(-50%) translateY(100px);
+        background: linear-gradient(135deg, var(--c2), var(--c1));
+        border: 1px solid rgba(94, 196, 184, 0.3);
+        backdrop-filter: blur(20px);
+        color: #fff;
+        padding: 0.85rem 1.75rem;
+        border-radius: 999px;
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 0.95rem;
+        font-weight: 500;
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+        z-index: 9999;
+        transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        pointer-events: none;
+        white-space: nowrap;
+      }
+      .toast.show {
+        transform: translateX(-50%) translateY(0);
+      }
+
+      /* ══════════════════════════════════════
+       CONFETTI (al completar)
+    ══════════════════════════════════════ */
+      .confetti-piece {
+        position: fixed;
+        width: 8px;
+        height: 8px;
+        border-radius: 2px;
+        pointer-events: none;
+        z-index: 9998;
+        animation: confettiFall var(--d) var(--dl) ease-in forwards;
+      }
+      @keyframes confettiFall {
+        0% {
+          opacity: 1;
+          transform: translate(0, 0) rotate(0deg);
+        }
+        100% {
+          opacity: 0;
+          transform: translate(var(--tx), 100vh) rotate(720deg);
+        }
+      }
+
+      /* ══════════════════════════════════════
+       UTILITIES
+    ══════════════════════════════════════ */
+      @keyframes fadeDown {
+        from {
+          opacity: 0;
+          transform: translateY(-16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+
+      .divider {
+        border: none;
+        height: 1px;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.08),
+          transparent
+        );
+        margin: 0;
+      }
+
+      /* ══════════════════════════════════════
+       RESPONSIVE — TABLET  (≤ 1024px)
+    ══════════════════════════════════════ */
+      @media (max-width: 1024px) {
+        .hero-title {
+          font-size: clamp(2.8rem, 8vw, 5rem);
+        }
+        .hero-image-wrap {
+          width: 250px;
+          height: 310px;
+        }
+        .section {
+          padding: 3rem 1.25rem;
+        }
+        .novena-section {
+          padding: 3rem 1.25rem;
+        }
+        .day-card-top {
+          padding: 2rem;
+        }
+        .day-card-body {
+          padding: 1.75rem 2rem 2rem;
+        }
+      }
+
+      /* ══════════════════════════════════════
+       RESPONSIVE — MOBILE  (≤ 640px)
+    ══════════════════════════════════════ */
+      @media (max-width: 640px) {
+        /* hero */
+        .hero {
+          padding: 5rem 1.25rem 3rem;
+          min-height: 100svh;
+          justify-content: flex-start;
+          align-items: center;
+          gap: 0;
+          overflow: clip;
+        }
+        .hero-eyebrow {
+          font-size: 0.75rem;
+          letter-spacing: 0.12rem;
+          margin-bottom: 1.25rem;
+          padding: 0.4rem 0.9rem;
+        }
+        .hero-title {
+          font-size: clamp(2.4rem, 11vw, 3.5rem);
+        }
+        .hero-title .line-light {
+          font-size: 0.5em;
+          letter-spacing: 0.1rem;
+        }
+        .hero-image-wrap {
+          width: 200px;
+          height: 250px;
+          margin: 1.25rem auto;
+        }
+        /* blobs — recortar en móvil para que no sangren */
+        .blob-2 {
+          right: -180px;
+        }
+        .blob-3 {
+          left: 10%;
+          bottom: -180px;
+        }
+        .hero-desc {
+          font-size: 1rem;
+          padding: 0.85rem 1.1rem;
+          margin-bottom: 1.75rem;
+          border-radius: 12px;
+        }
+        .hero-cta {
+          font-size: 0.95rem;
+          padding: 0.8rem 1.5rem;
+        }
+        .scroll-hint {
+          display: none;
+        }
+
+        /* progress */
+        .progress-section {
+          padding: 2rem 1.25rem;
+        }
+        .progress-inner {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1.25rem;
+        }
+        .ring-wrap {
+          width: 90px;
+          height: 90px;
+          align-self: center;
+        }
+        .ring-svg {
+          width: 90px;
+          height: 90px;
+        }
+        .ring-track,
+        .ring-fill {
+          cx: 45;
+          cy: 45;
+          r: 37;
+        }
+        .ring-fill {
+          stroke-dasharray: 232;
+          stroke-dashoffset: 232;
+        }
+        .ring-num {
+          font-size: 1.5rem;
+        }
+        .progress-info h3 {
+          font-size: 1.25rem;
+        }
+        .days-dots .ddot {
+          width: 30px;
+          height: 30px;
+          font-size: 0.82rem;
+        }
+
+        /* sections */
+        .section {
+          padding: 2.5rem 1.1rem;
+        }
+        .section-heading {
+          font-size: 1.75rem;
+        }
+        .novena-section {
+          padding: 2.5rem 1.1rem;
+        }
+
+        /* accordion */
+        .accordion-trigger {
+          padding: 1rem 1.1rem;
+        }
+        .accordion-icon-wrap {
+          width: 34px;
+          height: 34px;
+          font-size: 0.95rem;
+        }
+        .accordion-label {
+          font-size: 1rem;
+        }
+        .accordion-body-inner {
+          padding: 0 1.1rem 1.25rem;
+          padding-top: 1rem;
+        }
+        .prayer {
+          font-size: 1.15rem;
+          line-height: 1.9;
+        }
+
+        /* day pills — scroll horizontal en móvil */
+        .day-selector {
+          flex-wrap: nowrap;
+          overflow-x: auto;
+          -webkit-overflow-scrolling: touch;
+          scrollbar-width: none;
+          padding-bottom: 0.5rem;
+          gap: 0.4rem;
+        }
+        .day-selector::-webkit-scrollbar {
+          display: none;
+        }
+        .day-pill {
+          flex-shrink: 0;
+          font-size: 0.88rem;
+          padding: 0.4rem 0.85rem;
+        }
+
+        /* day card */
+        .day-card-inner {
+          border-radius: 20px;
+        }
+        .day-card-top {
+          padding: 1.35rem 1.25rem 1.1rem;
+          border-radius: 20px 20px 0 0;
+        }
+        .day-card-top::before {
+          font-size: 4.5rem;
+          right: 1rem;
+          top: 1rem;
+        }
+        .day-card-title {
+          font-size: 1.3rem;
+        }
+        .day-badge {
+          font-size: 0.75rem;
+        }
+        .day-card-body {
+          padding: 1.1rem 1.25rem 1.5rem;
+        }
+        .quote-mark {
+          font-size: 3.5rem;
+        }
+        .day-actions {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.85rem;
+        }
+        .btn-mark {
+          justify-content: center;
+          padding: 0.75rem 1rem;
+        }
+        .day-nav-row {
+          justify-content: center;
+        }
+        .btn-arrow {
+          width: 44px;
+          height: 44px;
+          font-size: 1.1rem;
+        }
+
+        /* final grid */
+        .final-grid {
+          grid-template-columns: 1fr;
+          gap: 0.65rem;
+        }
+        .final-card {
+          padding: 1.1rem;
+          border-radius: 16px;
+        }
+        .final-card-icon {
+          width: 32px;
+          height: 32px;
+          border-radius: 8px;
+          font-size: 0.9rem;
+        }
+        .final-card-name {
+          font-size: 0.95rem;
+        }
+
+        /* letanias */
+        .letanias-grid {
+          grid-template-columns: 1fr;
+          gap: 0.4rem;
+        }
+        .letania-row {
+          padding: 0.5rem 0.85rem;
+          border-radius: 10px;
+        }
+        .letania-inv {
+          font-size: 1.05rem;
+        }
+        .letania-resp {
+          font-size: 0.95rem;
+        }
+
+        /* footer */
+        footer {
+          padding: 2rem 1.25rem;
+        }
+
+        /* candles — ocultar en pantallas muy pequeñas */
+        .candles-row {
+          gap: 1.5rem;
+        }
+      }
+
+      /* ══════════════════════════════════════
+       RESPONSIVE — PEQUEÑO  (≤ 380px)
+    ══════════════════════════════════════ */
+      @media (max-width: 380px) {
+        .hero-title {
+          font-size: 2.2rem;
+        }
+        .hero-image-wrap {
+          width: 170px;
+          height: 215px;
+        }
+        .days-dots .ddot {
+          width: 26px;
+          height: 26px;
+          font-size: 0.78rem;
+        }
+        .day-card-title {
+          font-size: 1.15rem;
+        }
+      }
+
+      /* velas decorativas */
+      .candles-row {
+        display: flex;
+        justify-content: center;
+        gap: 2.5rem;
+        padding: 1rem 0 0;
+      }
+      .cv {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        position: relative;
+      }
+      .cv::before {
+        content: "";
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 60px;
+        height: 80px;
+        background: radial-gradient(
+          ellipse,
+          rgba(245, 166, 35, 0.35) 0%,
+          rgba(212, 168, 67, 0.15) 35%,
+          transparent 70%
+        );
+        filter: blur(4px);
+        animation: haloFlick 2.5s ease-in-out infinite alternate;
+        pointer-events: none;
+      }
+      @keyframes haloFlick {
+        0%,
+        100% {
+          opacity: 0.85;
+          transform: translateX(-50%) scale(1);
+        }
+        50% {
+          opacity: 1;
+          transform: translateX(-50%) scale(1.08);
+        }
+      }
+      .cf {
+        width: 12px;
+        height: 22px;
+        background: radial-gradient(
+          ellipse at 50% 85%,
+          #fff7c0 0%,
+          #fef4a0 25%,
+          #f5a623 60%,
+          transparent 100%
+        );
+        border-radius: 50% 50% 30% 30%;
+        animation: cf 1.8s ease-in-out infinite alternate;
+        position: relative;
+        z-index: 2;
+        box-shadow: 0 0 12px rgba(245, 166, 35, 0.6);
+      }
+      .cf.s2 {
+        animation-delay: 0.4s;
+      }
+      .cf.s3 {
+        animation-delay: 0.9s;
+      }
+      @keyframes cf {
+        0% {
+          transform: scaleX(1) rotate(-2deg);
+          opacity: 0.9;
+        }
+        50% {
+          transform: scaleX(0.85) rotate(2deg);
+          opacity: 1;
+        }
+        100% {
+          transform: scaleX(1.1) rotate(-1deg);
+          opacity: 0.8;
+        }
+      }
+      .cw {
+        width: 2px;
+        height: 5px;
+        background: #444;
+      }
+      .cb {
+        width: 16px;
+        border-radius: 3px 3px 2px 2px;
+        background: linear-gradient(180deg, var(--c8), var(--c6));
+      }
+      .cb.h1 {
+        height: 50px;
+      }
+      .cb.h2 {
+        height: 65px;
+      }
+      .cb.h3 {
+        height: 45px;
+      }
+      .cbase {
+        width: 22px;
+        height: 6px;
+        border-radius: 0 0 3px 3px;
+        background: var(--c5);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- CUSTOM CURSOR -->
+    <div class="cursor-ring" id="cursorRing"></div>
+    <div class="cursor-dot" id="cursorDot"></div>
+
+    <!-- GOLD PARTICLES -->
+    <div class="gold-particles" id="goldParticles"></div>
+
+    <!-- STICKY MINI-NAV -->
+    <div class="mini-nav" id="miniNav">
+      <div class="mini-nav-inner">
+        <div class="mini-nav-title"><strong>NOVENA</strong>San José Obrero</div>
+        <div class="mini-nav-prog">
+          <div class="mini-nav-ring">
+            <svg width="36" height="36" viewBox="0 0 36 36">
+              <circle
+                cx="18"
+                cy="18"
+                r="15"
+                fill="none"
+                stroke="rgba(255,255,255,0.1)"
+                stroke-width="3"
+              />
+              <circle
+                id="miniRing"
+                cx="18"
+                cy="18"
+                r="15"
+                fill="none"
+                stroke="url(#ringGrad)"
+                stroke-width="3"
+                stroke-linecap="round"
+                transform="rotate(-90 18 18)"
+                stroke-dasharray="94"
+                stroke-dashoffset="94"
+              />
+            </svg>
+          </div>
+          <span class="mini-nav-count" id="miniNavCount">0/9</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- BG BLOBS -->
+    <div class="blobs">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+      <div class="blob blob-3"></div>
+    </div>
+
+    <!-- SVG DEFS -->
+    <svg width="0" height="0" style="position: absolute">
+      <defs>
+        <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" stop-color="#5ec4b8" />
+          <stop offset="100%" stop-color="#d4a843" />
+        </linearGradient>
+      </defs>
+    </svg>
+
+    <!-- ══ HERO ══ -->
+    <section class="hero">
+      <div class="aurora"></div>
+      <div class="hero-eyebrow">
+        <span class="dot"></span>
+        Novena · Patrono de los Trabajadores
+      </div>
+
+      <h1 class="hero-title">
+        <span class="line-accent">San José</span>
+        Obrero
+        <span class="line-light">2026 · Nueve días de oración</span>
+      </h1>
+
+      <div class="hero-image-wrap">
+        <div class="hero-image-glow"></div>
+        <div class="hero-image-frame">
+          <img
+            src="san-jose.jpg"
+            alt="San José Obrero"
+            class="hero-image"
+            onerror="
+              this.parentElement.style.background =
+                'linear-gradient(160deg,var(--c2),var(--c1))';
+              this.style.display = 'none';
+            "
+          />
+        </div>
+      </div>
+
+      <p class="hero-desc">
+        Un camino de oración para encomendar tu trabajo,<br />
+        tu familia y tus intenciones al glorioso custodio<br />
+        de la Sagrada Familia.
+      </p>
+
+      <a href="#novena" class="hero-cta">
+        Comenzar la Novena
+        <span class="arrow">↓</span>
+      </a>
+
+      <div class="scroll-hint">
+        <div class="bar"></div>
+        Desplazar
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ══ PROGRESS ══ -->
+    <div class="progress-section">
+      <div class="progress-inner">
+        <div class="ring-wrap">
+          <svg
+            class="ring-svg"
+            width="120"
+            height="120"
+            viewBox="0 0 120 120"
+            style="width: 100%; height: 100%"
+          >
+            <circle class="ring-track" cx="60" cy="60" r="50" />
+            <circle class="ring-fill" id="ringFill" cx="60" cy="60" r="50" />
+          </svg>
+          <div class="ring-label">
+            <span class="ring-num" id="ringNum">0</span>
+            <span class="ring-of">de 9</span>
+          </div>
+        </div>
+        <div class="progress-info">
+          <h3>Tu progreso en la novena</h3>
+          <p>
+            Marca cada día al completarlo. Tu avance se guarda automáticamente
+            en este dispositivo.
+          </p>
+          <div class="days-dots" id="daysDots"></div>
+        </div>
+      </div>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- ══ ORACIONES INICIALES ══ -->
+    <section class="section">
+      <div class="section-label">Antes de empezar</div>
+      <h2 class="section-heading">Oraciones <em>Iniciales</em></h2>
+      <p
+        style="
+          color: rgba(255, 255, 255, 0.4);
+          font-size: 0.9rem;
+          margin-bottom: 1.75rem;
+          line-height: 1.7;
+        "
+      >
+        Recitar estas oraciones al inicio de cada día de la novena.
+      </p>
+
+      <div class="accordion-list">
+        <div class="accordion-item spotlight" id="acc-1">
+          <button class="accordion-trigger" onclick="toggleAcc('acc-1')">
+            <div class="accordion-icon-wrap">✠</div>
+            <span class="accordion-label">Señal de la Cruz</span>
+            <div class="accordion-chevron">▾</div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p class="prayer">
+                Por la señal de la Santa Cruz, de nuestros enemigos líbranos
+                Señor, Dios nuestro.<br /><br />
+                En el nombre del Padre, del Hijo y del Espíritu Santo.
+                <span class="amen">Amén.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item spotlight" id="acc-2">
+          <button class="accordion-trigger" onclick="toggleAcc('acc-2')">
+            <div class="accordion-icon-wrap">🙏</div>
+            <span class="accordion-label">Oración Inicial</span>
+            <div class="accordion-chevron">▾</div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p class="prayer">
+                <strong>¡Oh gloriosísimo Padre de Jesús!</strong> Esposo de
+                María. Protector de la Iglesia, a quien el Padre Eterno confió
+                el cuidado de orientar, regir y defender en la tierra a la
+                Sagrada Familia; protégenos también a nosotros, que
+                pertenecemos, como fieles creyentes, a la santa familia de tu
+                Hijo que es la Iglesia, y alcánzanos los bienes necesarios de
+                esta vida, y sobre todo los auxilios espirituales para la vida
+                eterna.<br /><br />
+                Alcánzanos especialmente estas tres gracias: la de no cometer
+                jamás ningún pecado mortal, principalmente el odio grave y
+                deliberado hacia otros; la de un sincero amor y devoción a Jesús
+                y María, y la de una buena muerte, recibiendo bien los últimos
+                Sacramentos. Concédenos además la gracia especial que te pedimos
+                cada uno en esta novena.<br /><br />
+                <span class="instruction"
+                  >(Pida con fervor y confianza la gracia que desea
+                  obtener)</span
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item spotlight" id="acc-3">
+          <button class="accordion-trigger" onclick="toggleAcc('acc-3')">
+            <div class="accordion-icon-wrap">💼</div>
+            <span class="accordion-label"
+              >Oración para Pedir por el Trabajo</span
+            >
+            <div class="accordion-chevron">▾</div>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p class="prayer">
+                <strong>¡Oh querido San José!</strong> mi bendito escolta y
+                guardián, el más generoso y bondadoso hombre con un corazón tan
+                noble y un alma armónica y gloriosa llena de afecto. Acudo a ti
+                en mi agobio para pedir tu auxilio. Pon tus amorosas manos en mi
+                crítico problema laboral y solicita al Dios creador que con su
+                bondad inagotable esparza su Espíritu Santo sobre mí y que por
+                su majestuosa disposición me salve y dé solución a tan
+                desesperada situación.<br /><br />
+                San José, jefe y dirigente de la Sagrada Familia, el más
+                confiado y obediente hacia la voluntad de Dios, con una
+                fidelidad intachable como esposo y el más honorario padre
+                adoptivo, que con el sudor y rasguños de tus manos diste
+                alimento a tu familia, por el profundo amor que guardaste al
+                Divino Niño y a la Virgen María, te imploro para que utilices tu
+                poder intercesor y estés presente en mis complicados problemas y
+                me liberes de esta desesperación que me agobia.<br /><br />
+                Pide por mí para que las puertas me sean abiertas y consiga
+                urgentemente el empleo o negocio propio para que me dé sustento
+                y me ayude a salir de tan grave complicación. Un empleo digno,
+                honorable, estable y bien pagado con el que sea capaz de hacerme
+                cargo de los gastos de mi familia, un trabajo en el que emplee
+                mis habilidades, que me ayude a explorar y experimentar, para
+                aumentar mi desarrollo como ser humano y me permita seguir
+                teniendo una relación con mi Dios todopoderoso.<br /><br />
+                Tú, que lo inalcanzable lo pones al alcance de nosotros. Haz que
+                prontamente mis motivaciones y esfuerzos por querer seguir
+                adelante se vean premiados con un trabajo que tenga la capacidad
+                de traerme riquezas abundantes y prosperidad continua.<br /><br />
+                <strong>¡Oh, mi querido San José!</strong> no me defraudes.
+                Comunícate con Dios para que logre conseguir lo que con
+                sencillez y con mucha fe de todo corazón pido:<br /><br />
+                <span class="instruction"
+                  >(Pida con fervor y confianza la gracia que desea
+                  obtener)</span
+                ><br /><br />
+                San José, alabado y querido pastor mío. Tú que eres quien
+                reparte las dichas del Rey de Reyes, déjame aprender de ti a
+                amar, adorar, alabar y ser fiel servidor de nuestro Dios
+                creador, hijo Salvador y Espíritu Santo glorificador. Protégeme,
+                resguárdame, ayúdame, cuídame y haz descender de los Cielos lo
+                que tan urgentemente necesito. Dame fuerza ante tanta hambruna y
+                decadencia; dame cuidado y silencio para salir exitoso de las
+                desesperanzas y complicaciones de mi vida; y antes que nada,
+                bríndame tu infinita seguridad con la finalidad de que, motivado
+                por ti y dispuesto a seguir tus pasos, sea capaz de vivir
+                armónicamente y en caridad con las demás personas, para así
+                lograr alcanzar la perpetua alegría que sólo la patria celestial
+                sabe dar. Por Jesús, mi Señor y Salvador.
+                <span class="amen">Amén.</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- candles -->
+      <div class="candles-row" style="margin-top: 3rem">
+        <div class="cv">
+          <div class="cf"></div>
+          <div class="cw"></div>
+          <div class="cb h1"></div>
+          <div class="cbase"></div>
+        </div>
+        <div class="cv">
+          <div class="cf s2"></div>
+          <div class="cw"></div>
+          <div class="cb h2"></div>
+          <div class="cbase"></div>
+        </div>
+        <div class="cv">
+          <div class="cf s3"></div>
+          <div class="cw"></div>
+          <div class="cb h3"></div>
+          <div class="cbase"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="ornament-div">
+      <svg
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="1.2"
+      >
+        <circle cx="12" cy="12" r="3" fill="currentColor" />
+        <path d="M12 2v6M12 16v6M2 12h6M16 12h6" />
+        <path d="M5 5l3 3M16 16l3 3M19 5l-3 3M8 16l-3 3" />
+      </svg>
+    </div>
+
+    <hr class="divider" />
+
+    <!-- ══ LOS NUEVE DÍAS ══ -->
+    <section class="novena-section" id="novena">
+      <div class="novena-inner">
+        <div class="section-label">La Novena</div>
+        <h2 class="section-heading" style="margin-bottom: 1.75rem">
+          Los <em>Nueve Días</em>
+        </h2>
+
+        <!-- PILLS -->
+        <div class="day-selector" id="daySelector"></div>
+
+        <!-- CARDS -->
+        <div id="dayCards"></div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ══ ORACIONES FINALES ══ -->
+    <section class="section">
+      <div class="section-label">Cada día al terminar</div>
+      <h2 class="section-heading">Oraciones <em>Finales</em></h2>
+      <p
+        style="
+          color: rgba(255, 255, 255, 0.4);
+          font-size: 0.9rem;
+          margin-bottom: 0.5rem;
+          line-height: 1.7;
+        "
+      >
+        Recitar al finalizar la oración de cada día.
+      </p>
+
+      <div class="final-grid">
+        <div
+          class="final-card spotlight"
+          id="fc-1"
+          onclick="toggleFinal('fc-1')"
+        >
+          <div class="final-card-head">
+            <div class="final-card-icon">🕊️</div>
+            <div>
+              <div class="final-card-name">Súplica</div>
+              <div class="final-card-hint">Toca para leer</div>
+            </div>
+            <span class="final-card-chevron">▾</span>
+          </div>
+          <div class="final-card-body">
+            <p class="prayer" style="font-size: 1.15rem">
+              <strong>¡Oh custodio y padre de Vírgenes San José!</strong> a cuya
+              fiel custodia fueron encomendadas la misma inocencia de Cristo
+              Jesús y la Virgen de las vírgenes María, por estas dos
+              queridísimas prendas Jesús y María, te ruego y suplico me
+              alcances, que preservado yo de toda impureza, sirva siempre
+              castísimamente con alma limpia, corazón puro y cuerpo casto a
+              Jesús y a María. <span class="amen">Amén.</span><br /><br />
+              Jesús, José y María, les doy mi corazón y el alma mía.<br />
+              Jesús, José y María, asístanme en mi última agonía.<br />
+              Jesús, José y María, con ustedes descanse en paz el alma mía.
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="final-card spotlight"
+          id="fc-2"
+          onclick="toggleFinal('fc-2')"
+        >
+          <div class="final-card-head">
+            <div class="final-card-icon">✠</div>
+            <div>
+              <div class="final-card-name">Antífona</div>
+              <div class="final-card-hint">Toca para leer</div>
+            </div>
+            <span class="final-card-chevron">▾</span>
+          </div>
+          <div class="final-card-body">
+            <p class="prayer" style="font-size: 1.15rem">
+              Tenía el mismo Jesús, al empezar su vida pública, cerca de treinta
+              años, hijo, según se pensaba de José.<br /><br />
+              San José, ruega por nosotros.
+              <em
+                >(Para que seamos dignos de alcanzar las promesas de
+                Jesucristo)</em
+              >
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="final-card spotlight"
+          id="fc-3"
+          onclick="toggleFinal('fc-3')"
+        >
+          <div class="final-card-head">
+            <div class="final-card-icon">🙏</div>
+            <div>
+              <div class="final-card-name">Oración Final</div>
+              <div class="final-card-hint">Toca para leer</div>
+            </div>
+            <span class="final-card-chevron">▾</span>
+          </div>
+          <div class="final-card-body">
+            <p class="prayer" style="font-size: 1.15rem">
+              <strong>¡Oh Dios!</strong> que con inefable providencia te
+              dignaste escoger al bienaventurado José por Esposo de tu Madre
+              Santísima; concédenos que, pues le veneramos como protector en la
+              tierra, merezcamos tenerle como protector en los cielos. ¡Oh Dios!
+              que vives y reinas por los siglos de los siglos.
+              <span class="amen">Amén.</span>
+            </p>
+          </div>
+        </div>
+
+        <div
+          class="final-card spotlight"
+          id="fc-4"
+          onclick="toggleFinal('fc-4')"
+        >
+          <div class="final-card-head">
+            <div class="final-card-icon">📿</div>
+            <div>
+              <div class="final-card-name">
+                Padre Nuestro · Ave María · Gloria
+              </div>
+              <div class="final-card-hint">Tres veces cada una</div>
+            </div>
+            <span class="final-card-chevron">▾</span>
+          </div>
+          <div class="final-card-body">
+            <p class="prayer" style="font-size: 1.15rem">
+              <strong>Padre Nuestro</strong> que estás en los cielos,
+              santificado sea tu Nombre, venga a nosotros tu Reino, hágase tu
+              voluntad así en la tierra como en el cielo. Danos hoy nuestro pan
+              de cada día, perdona nuestras ofensas como también nosotros
+              perdonamos a los que nos ofenden, no nos dejes caer en tentación y
+              líbranos del mal. <span class="amen">Amén.</span><br /><br />
+              <strong>Dios te salve, María,</strong> llena eres de gracia, el
+              Señor es contigo, bendita tú eres entre todas las mujeres, y
+              bendito es el fruto de tu vientre, Jesús. Santa María, Madre de
+              Dios, ruega por nosotros pecadores ahora y en la hora de nuestra
+              muerte. <span class="amen">Amén.</span><br /><br />
+              <strong>Gloria al Padre,</strong> al Hijo y al Espíritu Santo.
+              Como era en el principio, ahora y siempre, por los siglos de los
+              siglos. <span class="amen">Amén.</span><br /><br />
+              <em>(Rezar tres veces consecutivas cada oración)</em>
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <hr class="divider" />
+
+    <!-- ══ LETANÍAS ══ -->
+    <section class="letanias-section">
+      <div class="section" style="padding-bottom: 2rem">
+        <div class="section-label">Letanías</div>
+        <h2 class="section-heading">Letanías a <em>San José</em></h2>
+
+        <div class="letanias-grid">
+          <div class="letania-row">
+            <span class="letania-inv">San José</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Santa María</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Ilustre descendiente de David</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Luz de los patriarcas</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Esposo de la Madre de Dios</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Nutricio del Hijo de Dios</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Diligente defensor de Cristo</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Jefe de la Sagrada Familia</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">José justo</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">José casto</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">José prudente</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">José fuerte</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">José obediente</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">José fiel</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Espejo de paciencia</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Amante de la pobreza</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Modelo de obreros</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Gloria de la vida doméstica</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Sostén de las familias</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Consuelo de los desdichados</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Esperanza de los enfermos</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Patrono de los moribundos</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Terror de los demonios</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+          <div class="letania-row">
+            <span class="letania-inv">Patrono de la Iglesia universal</span
+            ><span class="letania-resp">Ruega por nosotros.</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 2rem">
+          <p class="prayer" style="font-size: 1.15rem">
+            V. Lo nombró administrador de su casa.<br />
+            R. Y señor de todas sus posesiones.<br /><br />
+            <strong>¡Oh Dios!</strong> que con inefable providencia te dignaste
+            elegir a San José para Esposo de tu Santísima Madre; te rogamos nos
+            concedas tenerlo como Intercesor en el cielo, ya que lo veneramos
+            como protector en la tierra. Tú, que vives y reinas por los siglos
+            de los siglos. <span class="amen">Amén.</span><br /><br />
+            <em>(Rezar un Padre Nuestro, un Ave María y un Gloria)</em>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ══ FOOTER ══ -->
+    <footer>
+      <span class="footer-cross">✠</span>
+      <p>
+        <strong style="color: rgba(255, 255, 255, 0.6)"
+          >Novena a San José Obrero 2025</strong
+        ><br />
+      </p>
+    </footer>
+
+    <!-- TOAST -->
+    <div class="toast" id="toast"></div>
+
+    <!-- ══════════════════════════════════════
+     SCRIPT
+══════════════════════════════════════ -->
+    <script>
+      /* ── DATA ── */
+      const DAYS = [
+        {
+          num: 1,
+          virtue: "Prudencia y Acierto",
+          shortTitle: "Prudencia",
+          title: "Prudencia y acierto en todos los casos dudosos y angustias",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> así como consolaste a tu padre amado en las perplejidades e incertidumbres que tuvo, dudando si abandonar a tu Santísima Madre, así te suplicamos humildemente por intercesión de San José nos concedas mucha <em>prudencia y acierto en todos los casos dudosos y angustias</em> de nuestra vida, para que siempre acertemos con tu santísima voluntad.`,
+        },
+        {
+          num: 2,
+          virtue: "Paciencia",
+          shortTitle: "Paciencia",
+          title: "Llevar con paciencia nuestra pobreza y desamparo",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> así como consolaste a tu padre amado en la pobreza y desamparo de Belén, con tu nacimiento, y con los cánticos de los Ángeles y visitas de los pastores, así también te suplicamos humildemente por intercesión de San José, que nos concedas <em>llevar con paciencia nuestra pobreza y desamparo</em> en esta vida, y que alegres nuestro espíritu con tu presencia y tu gracia, y la esperanza de la gloria.`,
+        },
+        {
+          num: 3,
+          virtue: "Amor y Respeto",
+          shortTitle: "Amor",
+          title: "Amor y respeto al Santísimo Nombre de Jesús",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> así como consolaste a tu amado padre en el doloroso misterio de la Circuncisión, recibiendo de él el dulce nombre de Jesús, así te suplicamos humildemente, por intercesión de San José, nos concedas <em>pronunciar siempre con amor y respeto tu santísimo nombre</em>, llevarlo en el corazón, honrarlo en la vida, y profesar con obras y palabras que tú fuiste nuestro Salvador y Jesús.`,
+        },
+        {
+          num: 4,
+          virtue: "Servicio",
+          shortTitle: "Servicio",
+          title: "Ser de aquellos para quienes Tú sirves",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> así como consolaste a tu padre amado de la pena que le causó la profecía de Simeón, mostrándole el innumerable coro de los Santos, así te suplicamos humildemente, por intercesión de San José que nos concedas la gracia de <em>ser de aquellos para quienes tú sirves</em>, no de ruina, sino de resurrección, y que correspondamos fielmente a tu gracia para que vayamos a tu gloria.`,
+        },
+        {
+          num: 5,
+          virtue: "Libertad",
+          shortTitle: "Libertad",
+          title: "Libres de los que quieren dañar nuestras almas",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> así como tu amado padre te condujo de Belén a Egipto para librarte del tirano Herodes, así te suplicamos humildemente, por intercesión de San José, que nos libres de los que quieren dañar nuestras almas o nuestros cuerpos, <em>nos des fortaleza y salvación en nuestras persecuciones</em>, y en medio del destierro de esta vida nos protejas hasta que volemos a la patria.`,
+        },
+        {
+          num: 6,
+          virtue: "Sustento",
+          shortTitle: "Sustento",
+          title: "Sustento espiritual de tu gracia",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> así como tu padre amado te sustentó en Nazaret, y en cambio tú le premiaste en tu santísima compañía tantos años, con tu doctrina y tu dulce conversación, así te rogamos humildemente, por intercesión de San José nos concedas el <em>sustento espiritual de tu gracia</em>, y de tu santa comunión, y que vivamos santa y modestamente, como tú en Nazaret.`,
+        },
+        {
+          num: 7,
+          virtue: "Obediencia",
+          shortTitle: "Obediencia",
+          title: "Nunca dejaré de hacer tu Voluntad",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> así como por seguir la voluntad de tu padre celestial permitiste que tu amado padre en la tierra padeciese el vehementísimo dolor de perderte por tres días, así te suplicamos humildemente, por intercesión de San José, que antes queramos perder todas las cosas y disgustar a cualquier amigo, que <em>dejar de hacer tu voluntad</em>; que jamás te perdamos a ti por el pecado mortal, o que si por desgracia te perdiésemos te hallemos mediante una buena confesión.`,
+        },
+        {
+          num: 8,
+          virtue: "Muerte",
+          shortTitle: "Tránsito",
+          title: "Muerte semejante a la Tuya",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> que en la hora de su muerte consolaste a tu glorioso padre, asistiendo juntamente con tu Madre su esposa a su última agonía, te suplicamos humildemente, por intercesión de San José, que nos concedas <em>una muerte semejante a la suya</em> asistido de tu bondad, de tu Santísima Madre y del mismo glorioso padre protector de los moribundos, pronunciando al morir sus santísimos nombres, Jesús, María y José.`,
+        },
+        {
+          num: 9,
+          virtue: "Verdad y Sinceridad",
+          shortTitle: "Verdad",
+          title: "Ser verdaderos y sinceros creyentes",
+          prayer: `<strong>¡Oh benignísimo Jesús!</strong> así como has elegido por medio de tu Vicario en la tierra a tu amado padre para protector de tu Iglesia, así te suplicamos humildemente por intercesión de San José, nos concedas el que <em>seamos verdaderos y sinceros creyentes</em>, que profesemos sin error la fe, que vivamos sin miedo una vida digna de la fe que profesamos, y que jamás puedan los enemigos ni aterrarnos con persecuciones.`,
+        },
+      ];
+
+      /* ── STATE ── */
+      let currentDay = 1;
+      let doneDays = JSON.parse(localStorage.getItem("sanjose25-done") || "[]");
+
+      /* ── BUILD ── */
+      const selEl = document.getElementById("daySelector");
+      const cardsEl = document.getElementById("dayCards");
+      const dotsEl = document.getElementById("daysDots");
+
+      DAYS.forEach((d) => {
+        // pill
+        const pill = document.createElement("button");
+        pill.className =
+          "day-pill" +
+          (d.num === 1 ? " active" : "") +
+          (doneDays.includes(d.num) ? " done-pill" : "");
+        pill.textContent = `${d.num}. ${d.shortTitle}`;
+        pill.id = `pill-${d.num}`;
+        pill.onclick = () => goDay(d.num);
+        selEl.appendChild(pill);
+
+        // card
+        const card = document.createElement("div");
+        card.className = "day-card" + (d.num === 1 ? " active" : "");
+        card.id = `card-${d.num}`;
+        card.innerHTML = `
+      <div class="day-card-inner spotlight">
+        <div class="day-card-top" data-num="${d.num}">
+          <div class="day-badge">Día ${d.num} de 9 · ${d.virtue}</div>
+          <h3 class="day-card-title"><em>${d.title}</em></h3>
+          <div class="day-virtue-tag"><span class="vdot"></span> Virtud del día: ${d.virtue}</div>
+        </div>
+        <div class="day-card-body">
+          <span class="quote-mark">"</span>
+          <p class="prayer">${d.prayer}</p>
+          <p class="prayer" style="margin-top:1.5rem;color:rgba(255,255,255,0.4);font-style:italic;font-size:1.1rem;">
+            (Pida con fervor y confianza la gracia que desea obtener)
+          </p>
+          <p class="prayer" style="margin-top:1rem;font-size:1.1rem;color:rgba(255,255,255,0.4);">
+            Continuar con las <strong style="color:rgba(255,255,255,0.6)">Oraciones Finales</strong>: Súplica · Antífona · Oración Final · Padre Nuestro, Ave María y Gloria.
+          </p>
+          <div class="day-actions">
+            <button class="btn-mark ${doneDays.includes(d.num) ? "marked" : ""}"
+                    id="bmark-${d.num}" onclick="markDay(${d.num})">
+              <span class="icon">${doneDays.includes(d.num) ? "✓" : "○"}</span>
+              ${doneDays.includes(d.num) ? "Completado" : "Marcar como rezado"}
+            </button>
+            <div class="day-nav-row">
+              <button class="btn-arrow" onclick="goDay(${d.num - 1})" ${d.num === 1 ? "disabled" : ""}>←</button>
+              <button class="btn-arrow fwd" onclick="goDay(${d.num + 1})" ${d.num === 9 ? "disabled" : ""}>
+                ${d.num === 9 ? "🙏" : "→"}
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>`;
+        cardsEl.appendChild(card);
+
+        // dot
+        const dot = document.createElement("div");
+        dot.className = "ddot" + (doneDays.includes(d.num) ? " done" : "");
+        dot.textContent = d.num;
+        dot.title = d.virtue;
+        dot.id = `dot-${d.num}`;
+        dot.onclick = () => goDay(d.num);
+        dotsEl.appendChild(dot);
+      });
+
+      /* ── NAV ── */
+      function goDay(n) {
+        if (n < 1 || n > 9) return;
+        document
+          .getElementById(`pill-${currentDay}`)
+          .classList.remove("active");
+        document
+          .getElementById(`card-${currentDay}`)
+          .classList.remove("active");
+        currentDay = n;
+        document.getElementById(`pill-${n}`).classList.add("active");
+        document.getElementById(`card-${n}`).classList.add("active");
+        document
+          .getElementById(`card-${n}`)
+          .scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }
+
+      /* ── MARK ── */
+      function markDay(n) {
+        if (doneDays.includes(n)) return;
+        doneDays.push(n);
+        localStorage.setItem("sanjose25-done", JSON.stringify(doneDays));
+
+        document.getElementById(`dot-${n}`).classList.add("done");
+        document.getElementById(`pill-${n}`).classList.add("done-pill");
+        const bm = document.getElementById(`bmark-${n}`);
+        bm.classList.add("marked");
+        bm.innerHTML = '<span class="icon">✓</span> Completado';
+
+        updateRing();
+
+        if (doneDays.length === 9) {
+          showToast("🎉 ¡Novena completa! San José ruega por ti.");
+          launchConfetti();
+        } else {
+          showToast(`🙏 Día ${n} rezado. ¡San José escucha tu oración!`);
+          if (n < 9) setTimeout(() => goDay(n + 1), 1000);
+        }
+      }
+
+      /* ── RING ── */
+      function updateRing() {
+        const pct = doneDays.length / 9;
+        const circumference = 314;
+        document.getElementById("ringFill").style.strokeDashoffset =
+          circumference - pct * circumference;
+        document.getElementById("ringNum").textContent = doneDays.length;
+      }
+      updateRing();
+
+      /* ── ACCORDION ── */
+      function toggleAcc(id) {
+        const el = document.getElementById(id);
+        el.classList.toggle("open");
+      }
+
+      /* ── FINAL CARDS ── */
+      function toggleFinal(id) {
+        const el = document.getElementById(id);
+        el.classList.toggle("open");
+      }
+
+      /* ── TOAST ── */
+      function showToast(msg) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.classList.add("show");
+        setTimeout(() => t.classList.remove("show"), 3800);
+      }
+
+      /* ── CONFETTI ── */
+      function launchConfetti() {
+        const colors = [
+          "#5ec4b8",
+          "#d4a843",
+          "#f0cc7a",
+          "#92dbd4",
+          "#ffffff",
+          "#3da89c",
+        ];
+        for (let i = 0; i < 80; i++) {
+          const el = document.createElement("div");
+          el.className = "confetti-piece";
+          el.style.cssText = `
+        left: ${Math.random() * 100}vw;
+        top: -10px;
+        background: ${colors[Math.floor(Math.random() * colors.length)]};
+        width: ${4 + Math.random() * 8}px;
+        height: ${4 + Math.random() * 8}px;
+        border-radius: ${Math.random() > 0.5 ? "50%" : "2px"};
+        --d: ${1.5 + Math.random() * 2.5}s;
+        --dl: ${Math.random() * 1.5}s;
+        --tx: ${-100 + Math.random() * 200}px;
+      `;
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 5000);
+        }
+      }
+
+      /* ─────────────────────────────────────
+     ✨ EFECTOS PREMIUM
+  ───────────────────────────────────── */
+
+      const isTouch = window.matchMedia("(hover: none)").matches;
+
+      /* ── CUSTOM CURSOR ── */
+      if (!isTouch) {
+        const dot = document.getElementById("cursorDot");
+        const ring = document.getElementById("cursorRing");
+        let mx = 0,
+          my = 0,
+          rx = 0,
+          ry = 0;
+
+        document.addEventListener("mousemove", (e) => {
+          mx = e.clientX;
+          my = e.clientY;
+          dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%,-50%)`;
+        });
+
+        function loop() {
+          rx += (mx - rx) * 0.18;
+          ry += (my - ry) * 0.18;
+          ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%,-50%)`;
+          requestAnimationFrame(loop);
+        }
+        loop();
+
+        // expandir cursor en elementos interactivos
+        document
+          .querySelectorAll(
+            "button, a, .day-pill, .ddot, .accordion-item, .final-card, .letania-row",
+          )
+          .forEach((el) => {
+            el.addEventListener("mouseenter", () =>
+              ring.classList.add("active"),
+            );
+            el.addEventListener("mouseleave", () =>
+              ring.classList.remove("active"),
+            );
+          });
+      }
+
+      /* ── 3D TILT en hero image ── */
+      if (!isTouch) {
+        const wrap = document.querySelector(".hero-image-wrap");
+        const frame = document.querySelector(".hero-image-frame");
+        if (wrap && frame) {
+          wrap.addEventListener("mousemove", (e) => {
+            const r = wrap.getBoundingClientRect();
+            const x = (e.clientX - r.left) / r.width - 0.5;
+            const y = (e.clientY - r.top) / r.height - 0.5;
+            frame.style.transform = `perspective(800px) rotateY(${x * 18}deg) rotateX(${-y * 18}deg) scale(1.04)`;
+            frame.style.transition = "transform 0.15s ease-out";
+          });
+          wrap.addEventListener("mouseleave", () => {
+            frame.style.transform = "";
+            frame.style.transition =
+              "transform 0.6s cubic-bezier(.34,1.56,.64,1)";
+          });
+        }
+      }
+
+      /* ── MAGNETIC CTA BUTTON ── */
+      if (!isTouch) {
+        const cta = document.querySelector(".hero-cta");
+        if (cta) {
+          cta.addEventListener("mousemove", (e) => {
+            const r = cta.getBoundingClientRect();
+            const x = e.clientX - r.left - r.width / 2;
+            const y = e.clientY - r.top - r.height / 2;
+            cta.style.transform = `translate(${x * 0.25}px, ${y * 0.35}px) translateY(-2px)`;
+          });
+          cta.addEventListener("mouseleave", () => {
+            cta.style.transform = "";
+            cta.style.transition =
+              "transform 0.5s cubic-bezier(.34,1.56,.64,1)";
+            setTimeout(() => (cta.style.transition = ""), 500);
+          });
+        }
+      }
+
+      /* ── SPOTLIGHT (mouse follow glow) ── */
+      if (!isTouch) {
+        document.querySelectorAll(".spotlight").forEach((el) => {
+          el.addEventListener("mousemove", (e) => {
+            const r = el.getBoundingClientRect();
+            el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+            el.style.setProperty("--my", `${e.clientY - r.top}px`);
+          });
+        });
+        // re-aplicar en day cards generadas dinámicamente
+        new MutationObserver(() => {
+          document
+            .querySelectorAll(".spotlight:not([data-sp])")
+            .forEach((el) => {
+              el.dataset.sp = "1";
+              el.addEventListener("mousemove", (e) => {
+                const r = el.getBoundingClientRect();
+                el.style.setProperty("--mx", `${e.clientX - r.left}px`);
+                el.style.setProperty("--my", `${e.clientY - r.top}px`);
+              });
+            });
+        }).observe(document.body, { childList: true, subtree: true });
+      }
+
+      /* ── GOLD PARTICLES ── */
+      const gpContainer = document.getElementById("goldParticles");
+      for (let i = 0; i < 22; i++) {
+        const p = document.createElement("div");
+        p.className = "gp";
+        const size = 2 + Math.random() * 4;
+        p.style.cssText = `
+      width:${size}px; height:${size}px;
+      left:${Math.random() * 100}%;
+      --dur:${10 + Math.random() * 14}s;
+      --delay:${Math.random() * 12}s;
+      --drift:${-50 + Math.random() * 100}px;
+    `;
+        gpContainer.appendChild(p);
+      }
+
+      /* ── STICKY MINI-NAV (aparece después del hero) ── */
+      const miniNav = document.getElementById("miniNav");
+      const heroEl = document.querySelector(".hero");
+      const heroObs = new IntersectionObserver(
+        ([entry]) => {
+          miniNav.classList.toggle("show", !entry.isIntersecting);
+        },
+        { threshold: 0.15 },
+      );
+      heroObs.observe(heroEl);
+
+      /* sincronizar mini-ring con el progreso */
+      const miniRing = document.getElementById("miniRing");
+      const miniCount = document.getElementById("miniNavCount");
+      function syncMini() {
+        const pct = doneDays.length / 9;
+        const C = 94; // 2 * π * 15
+        miniRing.style.strokeDashoffset = C - pct * C;
+        miniCount.textContent = `${doneDays.length}/9`;
+      }
+      syncMini();
+
+      /* ── ANIMATED COUNTER en el ring grande ── */
+      let lastDone = doneDays.length;
+      const ringNumEl = document.getElementById("ringNum");
+      function animateRingCounter(to) {
+        const from = parseInt(ringNumEl.textContent) || 0;
+        if (from === to) return;
+        const start = performance.now();
+        const duration = 700;
+        function tick(now) {
+          const t = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - t, 3);
+          ringNumEl.textContent = Math.round(from + (to - from) * eased);
+          if (t < 1) requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      }
+
+      /* monkey-patch markDay original para sincronizar */
+      const _origMark = markDay;
+      markDay = function (n) {
+        _origMark(n);
+        animateRingCounter(doneDays.length);
+        syncMini();
+      };
+
+      /* ── INTERSECTION OBSERVER para reveal ── */
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.style.opacity = "1";
+              e.target.style.transform = "translateY(0)";
+            }
+          });
+        },
+        { threshold: 0.1 },
+      );
+
+      document
+        .querySelectorAll(".accordion-item, .final-card, .letania-row")
+        .forEach((el) => {
+          el.style.opacity = "0";
+          el.style.transform = "translateY(12px)";
+          el.style.transition = "opacity 0.5s ease, transform 0.5s ease";
+          observer.observe(el);
+        });
+    </script>
+  </body>
+</html>
