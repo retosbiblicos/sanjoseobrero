@@ -16,24 +16,24 @@
        TOKENS
     ══════════════════════════════════════ */
       :root {
-        --c0: #0d2b29; /* darkest */
-        --c1: #133d39;
-        --c2: #1a5450;
-        --c3: #226b65;
-        --c4: #2e897f;
-        --c5: #5ec4b8; /* +20% más claro */
-        --c6: #7dd3cc;
-        --c7: #aee5e0;
-        --c8: #d8f5f1;
-        --c9: #f3fdfc;
-        --gold: #d4a843;
-        --gold2: #f0cc7a;
+        --c0: #f0fffe;   /* main bg – very light mint */
+        --c1: #e4f9f7;
+        --c2: #c4f0ec;
+        --c3: #8dd9d1;
+        --c4: #52b8ae;
+        --c5: #2e9d93;
+        --c6: #1f7a72;
+        --c7: #145c55;
+        --c8: #0c3c37;
+        --c9: #071e1c;
+        --gold: #b07a1a;
+        --gold2: #c99930;
         --white: #ffffff;
-        --glass: rgba(255, 255, 255, 0.07);
-        --glass-border: rgba(255, 255, 255, 0.14);
+        --glass: rgba(0, 0, 0, 0.04);
+        --glass-border: rgba(0, 0, 0, 0.10);
         --radius-lg: 24px;
         --radius-xl: 36px;
-        --shadow-glow: 0 0 60px rgba(62, 168, 156, 0.25);
+        --shadow-glow: 0 0 60px rgba(46, 157, 147, 0.15);
       }
 
       *,
@@ -50,7 +50,7 @@
       body {
         font-family: "Inter", sans-serif;
         background: var(--c0);
-        color: var(--white);
+        color: #0d2e2b;
         min-height: 100vh;
         overflow-x: hidden;
         cursor: none;
@@ -81,7 +81,7 @@
       .cursor-ring {
         width: 36px;
         height: 36px;
-        border: 1.5px solid rgba(255, 255, 255, 0.45);
+        border: 1.5px solid rgba(13, 46, 43, 0.45);
         transition:
           width 0.25s ease,
           height 0.25s ease,
@@ -185,7 +185,7 @@
         left: 0;
         right: 0;
         z-index: 200;
-        background: rgba(13, 43, 41, 0.78);
+        background: rgba(240, 255, 254, 0.92);
         backdrop-filter: blur(24px) saturate(140%);
         -webkit-backdrop-filter: blur(24px) saturate(140%);
         border-bottom: 1px solid rgba(94, 196, 184, 0.12);
@@ -208,7 +208,7 @@
         font-family: "Cormorant Garamond", serif;
         font-style: italic;
         font-size: 1.15rem;
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(13, 46, 43, 0.85);
       }
       .mini-nav-title strong {
         color: var(--gold2);
@@ -524,7 +524,7 @@
       }
       .hero-title .line-light {
         font-weight: 300;
-        color: rgba(255, 255, 255, 0.55);
+        color: rgba(13, 46, 43, 0.55);
         font-size: 0.55em;
         letter-spacing: 0.25rem;
         text-transform: uppercase;
@@ -630,10 +630,10 @@
         color: var(--c8);
         margin-bottom: 2.5rem;
         animation: fadeUp 0.9s 0.4s ease both;
-        background: rgba(13, 43, 41, 0.65);
+        background: rgba(255, 255, 255, 0.75);
         backdrop-filter: blur(14px);
         -webkit-backdrop-filter: blur(14px);
-        border: 1px solid rgba(94, 196, 184, 0.18);
+        border: 1px solid rgba(46, 157, 147, 0.25);
         border-radius: 16px;
         padding: 1rem 1.5rem;
       }
@@ -643,7 +643,7 @@
         align-items: center;
         gap: 0.75rem;
         background: linear-gradient(135deg, var(--c4), var(--c3));
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(13, 46, 43, 0.15);
         color: #fff;
         font-family: "Space Grotesk", sans-serif;
         font-weight: 600;
@@ -655,7 +655,7 @@
         text-decoration: none;
         box-shadow:
           0 8px 32px rgba(46, 137, 127, 0.35),
-          inset 0 1px 0 rgba(255, 255, 255, 0.15);
+          inset 0 1px 0 rgba(13, 46, 43, 0.15);
         transition: all 0.25s;
         animation: fadeUp 0.9s 0.5s ease both;
       }
@@ -663,12 +663,12 @@
         transform: translateY(-2px);
         box-shadow:
           0 16px 48px rgba(46, 137, 127, 0.5),
-          inset 0 1px 0 rgba(255, 255, 255, 0.2);
+          inset 0 1px 0 rgba(13, 46, 43, 0.2);
       }
       .hero-cta .arrow {
         width: 28px;
         height: 28px;
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(13, 46, 43, 0.15);
         border-radius: 50%;
         display: flex;
         align-items: center;
@@ -686,7 +686,7 @@
         flex-direction: column;
         align-items: center;
         gap: 0.5rem;
-        color: rgba(255, 255, 255, 0.3);
+        color: rgba(13, 46, 43, 0.3);
         font-size: 0.7rem;
         letter-spacing: 0.15rem;
         text-transform: uppercase;
@@ -766,8 +766,8 @@
         position: relative;
         z-index: 10;
         background: linear-gradient(135deg, var(--c1) 0%, var(--c0) 100%);
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: 1px solid rgba(13, 46, 43, 0.06);
+        border-bottom: 1px solid rgba(13, 46, 43, 0.06);
         padding: 3rem 1.5rem;
       }
       .progress-inner {
@@ -789,7 +789,7 @@
       }
       .ring-track {
         fill: none;
-        stroke: rgba(255, 255, 255, 0.07);
+        stroke: rgba(13, 46, 43, 0.05);
         stroke-width: 8;
       }
       .ring-fill {
@@ -820,7 +820,7 @@
       }
       .ring-of {
         font-size: 0.82rem;
-        color: rgba(255, 255, 255, 0.35);
+        color: rgba(13, 46, 43, 0.35);
         letter-spacing: 0.05rem;
       }
 
@@ -835,7 +835,7 @@
         margin-bottom: 0.35rem;
       }
       .progress-info p {
-        color: rgba(255, 255, 255, 0.45);
+        color: rgba(13, 46, 43, 0.45);
         font-size: 1rem;
         line-height: 1.6;
       }
@@ -850,15 +850,15 @@
         width: 36px;
         height: 36px;
         border-radius: 50%;
-        border: 1.5px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.04);
+        border: 1.5px solid rgba(13, 46, 43, 0.12);
+        background: rgba(13, 46, 43, 0.04);
         display: flex;
         align-items: center;
         justify-content: center;
         font-family: "Space Grotesk", sans-serif;
         font-size: 0.75rem;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.35);
+        color: rgba(13, 46, 43, 0.35);
         cursor: pointer;
         transition: all 0.2s;
       }
@@ -929,13 +929,13 @@
         font-family: "Space Grotesk", sans-serif;
         font-size: 1.05rem;
         font-weight: 500;
-        color: rgba(255, 255, 255, 0.9);
+        color: rgba(13, 46, 43, 0.9);
       }
       .accordion-chevron {
         width: 24px;
         height: 24px;
         border-radius: 50%;
-        border: 1px solid rgba(255, 255, 255, 0.15);
+        border: 1px solid rgba(13, 46, 43, 0.15);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -959,7 +959,7 @@
       }
       .accordion-body-inner {
         padding: 0 1.5rem 1.75rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: 1px solid rgba(13, 46, 43, 0.06);
         padding-top: 1.25rem;
       }
 
@@ -967,7 +967,7 @@
         font-family: "Cormorant Garamond", serif;
         font-size: 1.25rem;
         line-height: 2;
-        color: rgba(255, 255, 255, 0.75);
+        color: rgba(13, 46, 43, 0.75);
       }
       .prayer strong {
         color: var(--c7);
@@ -986,7 +986,7 @@
         display: block;
         margin-top: 1rem;
         font-style: italic;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(13, 46, 43, 0.4);
         font-size: 1.05rem;
       }
 
@@ -1013,9 +1013,9 @@
       .day-pill {
         padding: 0.45rem 1rem;
         border-radius: 999px;
-        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        border: 1.5px solid rgba(13, 46, 43, 0.12);
         background: transparent;
-        color: rgba(255, 255, 255, 0.45);
+        color: rgba(13, 46, 43, 0.45);
         font-family: "Space Grotesk", sans-serif;
         font-size: 0.92rem;
         font-weight: 600;
@@ -1074,7 +1074,7 @@
           rgba(34, 107, 101, 0.15) 50%,
           rgba(19, 61, 57, 0.05) 100%
         );
-        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+        border-bottom: 1px solid rgba(13, 46, 43, 0.05);
       }
       .day-card-top::before {
         content: attr(data-num);
@@ -1085,7 +1085,7 @@
         font-size: 7rem;
         font-weight: 700;
         line-height: 1;
-        color: rgba(255, 255, 255, 0.04);
+        color: rgba(13, 46, 43, 0.04);
         pointer-events: none;
         user-select: none;
       }
@@ -1123,7 +1123,7 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        color: rgba(255, 255, 255, 0.4);
+        color: rgba(13, 46, 43, 0.4);
         font-size: 0.95rem;
         font-family: "Space Grotesk", sans-serif;
       }
@@ -1157,7 +1157,7 @@
         flex-wrap: wrap;
         margin-top: 2rem;
         padding-top: 1.5rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.07);
+        border-top: 1px solid rgba(13, 46, 43, 0.05);
       }
       .btn-mark {
         display: inline-flex;
@@ -1195,9 +1195,9 @@
         width: 40px;
         height: 40px;
         border-radius: 50%;
-        border: 1.5px solid rgba(255, 255, 255, 0.12);
+        border: 1.5px solid rgba(13, 46, 43, 0.12);
         background: transparent;
-        color: rgba(255, 255, 255, 0.6);
+        color: rgba(13, 46, 43, 0.6);
         cursor: pointer;
         font-size: 1rem;
         display: flex;
@@ -1294,11 +1294,11 @@
         font-family: "Space Grotesk", sans-serif;
         font-size: 1.05rem;
         font-weight: 600;
-        color: rgba(255, 255, 255, 0.85);
+        color: rgba(13, 46, 43, 0.85);
       }
       .final-card-hint {
         font-size: 0.88rem;
-        color: rgba(255, 255, 255, 0.35);
+        color: rgba(13, 46, 43, 0.35);
         margin-top: 0.1rem;
       }
       .final-card-body {
@@ -1326,7 +1326,7 @@
         position: relative;
         z-index: 10;
         background: linear-gradient(180deg, var(--c0) 0%, var(--c1) 100%);
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: 1px solid rgba(13, 46, 43, 0.06);
       }
       .letanias-grid {
         display: grid;
@@ -1341,8 +1341,8 @@
         gap: 0.75rem;
         padding: 0.65rem 1rem;
         border-radius: 12px;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(13, 46, 43, 0.03);
+        border: 1px solid rgba(13, 46, 43, 0.05);
         transition: background 0.2s;
       }
       .letania-row:hover {
@@ -1351,7 +1351,7 @@
       .letania-inv {
         font-family: "Cormorant Garamond", serif;
         font-size: 1.1rem;
-        color: rgba(255, 255, 255, 0.7);
+        color: rgba(13, 46, 43, 0.7);
       }
       .letania-resp {
         font-family: "Cormorant Garamond", serif;
@@ -1368,7 +1368,7 @@
       footer {
         position: relative;
         z-index: 10;
-        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        border-top: 1px solid rgba(13, 46, 43, 0.06);
         padding: 2.5rem 1.5rem;
         text-align: center;
       }
@@ -1380,7 +1380,7 @@
         margin-bottom: 0.75rem;
       }
       footer p {
-        color: rgba(255, 255, 255, 0.3);
+        color: rgba(13, 46, 43, 0.3);
         font-size: 0.92rem;
         line-height: 1.8;
       }
@@ -1477,7 +1477,7 @@
         background: linear-gradient(
           90deg,
           transparent,
-          rgba(255, 255, 255, 0.08),
+          rgba(13, 46, 43, 0.08),
           transparent
         );
         margin: 0;
@@ -1886,7 +1886,7 @@
                 cy="18"
                 r="15"
                 fill="none"
-                stroke="rgba(255,255,255,0.1)"
+                stroke="rgba(13,46,43,0.1)"
                 stroke-width="3"
               />
               <circle
@@ -2013,7 +2013,7 @@
       <h2 class="section-heading">Oraciones <em>Iniciales</em></h2>
       <p
         style="
-          color: rgba(255, 255, 255, 0.4);
+          color: rgba(13, 46, 43, 0.4);
           font-size: 0.9rem;
           margin-bottom: 1.75rem;
           line-height: 1.7;
@@ -2201,7 +2201,7 @@
       <h2 class="section-heading">Oraciones <em>Finales</em></h2>
       <p
         style="
-          color: rgba(255, 255, 255, 0.4);
+          color: rgba(13, 46, 43, 0.4);
           font-size: 0.9rem;
           margin-bottom: 0.5rem;
           line-height: 1.7;
@@ -2455,7 +2455,7 @@
     <footer>
       <span class="footer-cross">✠</span>
       <p>
-        <strong style="color: rgba(255, 255, 255, 0.6)"
+        <strong style="color: rgba(13, 46, 43, 0.6)"
           >Novena a San José Obrero 2025</strong
         ><br />
       </p>
@@ -2570,11 +2570,11 @@
         <div class="day-card-body">
           <span class="quote-mark">"</span>
           <p class="prayer">${d.prayer}</p>
-          <p class="prayer" style="margin-top:1.5rem;color:rgba(255,255,255,0.4);font-style:italic;font-size:1.1rem;">
+          <p class="prayer" style="margin-top:1.5rem;color:rgba(13,46,43,0.5);font-style:italic;font-size:1.1rem;">
             (Pida con fervor y confianza la gracia que desea obtener)
           </p>
-          <p class="prayer" style="margin-top:1rem;font-size:1.1rem;color:rgba(255,255,255,0.4);">
-            Continuar con las <strong style="color:rgba(255,255,255,0.6)">Oraciones Finales</strong>: Súplica · Antífona · Oración Final · Padre Nuestro, Ave María y Gloria.
+          <p class="prayer" style="margin-top:1rem;font-size:1.1rem;color:rgba(13,46,43,0.5);">
+            Continuar con las <strong style="color:rgba(13,46,43,0.7)">Oraciones Finales</strong>: Súplica · Antífona · Oración Final · Padre Nuestro, Ave María y Gloria.
           </p>
           <div class="day-actions">
             <button class="btn-mark ${doneDays.includes(d.num) ? "marked" : ""}"
